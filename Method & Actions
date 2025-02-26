@@ -1,0 +1,105 @@
+1.
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+public class FacebookSignupAutomation {
+    public static void main(String[] args) throws InterruptedException {
+        
+        System.setProperty("webdriver.chrome.driver", "C:\\path\\to\\chromedriver.exe");
+        
+        
+        WebDriver driver = new ChromeDriver();
+        
+        
+        driver.get("https://www.facebook.com/");
+        driver.manage().window().maximize();
+        
+        if (driver.getTitle().contains("Facebook")) {
+            System.out.println("Facebook homepage loaded successfully!");
+        } else {
+            System.out.println("Failed to load Facebook homepage.");
+            driver.quit();
+            return;
+        }
+
+        
+        driver.findElement(By.xpath( //*[@id="blueBarDOMInspector"]/div/div[2]/div/div/span/a).click();
+        Thread.sleep(2000);  
+
+
+        driver.findElement(By.xpath(“ //*[@id="u_0_8_8+"]”).sendKeys("hari");
+        driver.findElement(By.xpath(“//*[@id="u_0_a_Nq"]”).sendKeys("prasath");
+        driver.findElement(By.xpath(“//*[@id="u_0_h_Kh"])”).sendKeys("hariprasathhere@gmail.com");
+
+        driver.findElement(By.xpath(“//*[@id="password_step_input"]”).sendKeys("1234");
+
+       
+        Select day = new Select(driver.findElement(By.xpath (“//select[@id='day']”));
+        day.selectByVisibleText("26");
+
+        Select month = new Select(driver.findElement(By.xpath(“//select[@id='month']”));
+        month.selectByVisibleText("Feb");
+
+        Select year = new Select(driver.findElement(By.xpath(“//select[@id='year']”));
+        year.selectByVisibleText("2025");
+
+        WebElement genderMale = driver.findElement(By.xpath(“//label[normalize-space()='Male']”)
+        genderMale.click();
+
+        driver.findElement(By.xpath("//button[@id='u_0_n_uN']")).click();
+        Thread.sleep(5000); // Wait for some time
+        if (driver.getCurrentUrl().contains("welcome")) {
+            System.out.println("User successfully registered and redirected to Facebook homepage.");
+        } else {
+            System.out.println("Sign-up process may have failed.");
+        }
+
+        // Close browser
+        driver.quit();
+    }
+}
+
+
+
+2.
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+public class DragAndDropTest {
+    public static void main(String[] args) throws InterruptedException {
+        System.setProperty("webdriver.chrome.driver", "C:\\path\\to\\chromedriver.exe");
+
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://jqueryui.com/droppable");
+        driver.manage().window().maximize();
+        
+        driver.switchTo().frame(0);
+        WebElement sourceElement = driver.findElement(By.id("draggable"));  
+        WebElement targetElement = driver.findElement(By.id("droppable"));  
+
+        
+        Actions action = new Actions(driver);
+        action.dragAndDrop(sourceElement, targetElement).perform();
+
+        String targetText = targetElement.getText();
+        if (targetText.equals("Dropped!")) {
+            System.out.println("Drag and Drop successful!");
+        } else {
+            System.out.println("Drag and Drop failed!");
+        }
+
+        String color = targetElement.getCssValue("background-color");
+        System.out.println("Background color after drop: " + color);
+
+        // Close the browser
+        driver.quit();
+    }
+}
