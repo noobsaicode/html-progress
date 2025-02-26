@@ -1,0 +1,53 @@
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import java.util.concurrent.TimeUnit;
+
+public class SnapdealLoginTest {
+    public static void main(String[] args) {
+        System.setProperty("webdriver.chrome.driver", "path/to/chromedriver");
+
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.get("https://www.snapdeal.com");
+
+        Actions actions = new Actions(driver);
+
+        WebElement signInButton = driver.findElement(By.xpath(//i[@class='sd-icon sd-icon-user']));
+        actions.moveToElement(signInButton).perform();
+
+        WebElement loginButton = driver.findElement(By.xpath("//span[@class='accountBtn btn rippleWhite']"));
+        loginButton.click();
+        WebElement loginFrame = driver.findElement(By.xpath("//iframe[contains(@id,'loginIframe')]"));
+        driver.switchTo().frame(loginFrame);
+
+        WebElement emailField = driver.findElement(By.xpath(“ //input[@id='userName']”);
+);
+
+        WebElement continueButton = driver.findElement(By.Xpath(“//button[@id='checkUser']”).click();
+
+        
+        WebElement passwordField = driver.findElement(By.xpath(“//form[@id='loginOtpUC']//input[@placeholder='Code']”));
+        passwordField.sendKeys("12345");
+
+        
+        WebElement loginSubmitButton = driver.findElement(By.xpath (“//button[@id='loginUsingOtp']”);
+        loginSubmitButton.click();
+
+        
+        try {
+            WebElement userProfile = driver.findElement(By.xpath("//div[contains(text(),'hariprasathhere@gmail.com')]"));
+            if (userProfile.isDisplayed()) {
+                System.out.println("Login Successful: User is logged in.");
+            } else {
+                System.out.println("Login Failed: User is not logged in.");
+            }
+        } catch (Exception e) {
+            System.out.println("Login Failed: User is not logged in.");
+        }
+        driver.quit();
+    }
+}
